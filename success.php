@@ -16,7 +16,7 @@ if(!isset($_GET['success'])){
   $phone = checkInput($_SESSION['phone']);
   $fname = checkInput($_SESSION['fname']);
   $lname = checkInput($_SESSION['lname']);
-  $courses   = $_SESSION['course'];
+  $courses   = json_encode($_SESSION['course']);
   $transactionId = $models->getTransactionByReferenceID($reference);
   
       if($transactionId == null OR $transactionId == '' OR empty($transactionId) && $transactionId != $reference){

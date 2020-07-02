@@ -1,13 +1,13 @@
-CREATE DATABASE IF NOT EXISTS `ispaceshopping`;
-USE `ispaceshopping`;
-CREATE TABLE IF NOT EXISTS `test_courses_information`
+CREATE DATABASE IF NOT EXISTS `moodle`;
+USE `moodle`;
+CREATE TABLE IF NOT EXISTS `courses_information`
 (
   `id` int(11) unsigned not null auto_increment primary key,
   `course_id` int(11) unsigned not null,
   `fullname` varchar(64) COLLATE utf8mb4_unicode_ci not null,
   `shortname` varchar(64) COLLATE utf8mb4_unicode_ci not null,
   `amount` varchar(64) COLLATE utf8mb4_unicode_ci not null,
-  `couse_image` varchar(64) COLLATE utf8mb4_unicode_ci not null,
+  `course_image` varchar(64) COLLATE utf8mb4_unicode_ci not null,
   `summary` text COLLATE utf8mb4_unicode_ci not null
 )Engine = InnoDB DEFAULT CHARSET=utf8;
 
@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `email` varchar(175) NOT NULL,
   `currency` varchar(225) NOT NULL,
   `grand_total` decimal(10,2) NOT NULL,
+  `courses` text NULL,
   `txn_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

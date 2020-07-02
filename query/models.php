@@ -240,9 +240,9 @@ class Models extends Database{
     }
 
   
-    public function insertTransaction($trans_id, $fname,$lname, $amout, $email, $curr,array $courses)
+    public function insertTransaction($trans_id, $fname,$lname, $amout, $email, $curr,$courses)
     {
-      $courses2 = implode(',', $courses);
+     
     
       $sql = "INSERT INTO transactions (transaction_id, fname, lname, grand_total, currency, email,courses) VALUES (?,?,?,?,?,?,?)";
         $stmt = $this->conn->prepare($sql);
@@ -252,7 +252,7 @@ class Models extends Database{
           echo " Error ". $this->conn->error;
           exit();
         }
-        if(!$stmt->bind_param('sssdsss',$trans_id, $fname, $lname, $amout,$curr,$email,$courses2))
+        if(!$stmt->bind_param('sssdsss',$trans_id, $fname, $lname, $amout,$curr,$email,$courses))
         {
           echo " Error ". $this->conn->error;
           exit();
