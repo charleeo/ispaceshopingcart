@@ -252,7 +252,8 @@ class Models extends Database{
           echo " Error ". $this->conn->error;
           exit();
         }
-        if(!$stmt->bind_param('sssdsss',$trans_id, $fname, $lname, $amout,$curr,$email,$courses))
+        if(!$stmt->bind_param('sssdsss',$trans_id, $fname, $lname, $amout,$curr,$email,$courses
+        ))
         {
           echo " Error ". $this->conn->error;
           exit();

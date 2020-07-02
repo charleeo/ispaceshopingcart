@@ -1,8 +1,9 @@
-<nav class="navbar navbar-expand-lg navbar-light shadow-sm fixed-top my-nav">
+
+<nav class="navbar navbar-expand-lg  shadow  my-nav pr-5 " style="background:#fff!important; height:100px;">
   
   <ul class="navbar-nav mr-auto">
     <li class="nav-item active">
-      <a class="nav-link " href="https://ispace.prolearncloud.com"> <img src="./assets/images/logo/ispacelogo.png" alt=" Ispacelogo" width="90%"> <span class="sr-only">(current)</span></a>
+      <a class="nav-link " href="https://ispace.prolearncloud.com"> <img src="./assets/images/logo/ispacelogo.png" alt=" Ispacelogo" width="300px" height="80px"> <span class="sr-only">(current)</span></a>
     </li>
   </ul>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,10 +39,11 @@
     <!--  -->
 
     <ul class="navbar-nav mr-0">
+      <?php if(!empty($_SESSION['cart'])){?>
       <li class="">
         <a href="view_cart.php" class="nav-item nav-link ">
           View Cart
-          <i class="fas fa-shopping-cart fa-lg "></i>
+          <i class="fas fa-shopping-cart fa-lg  text-secondary"></i>
           <?php
 
           if (isset($_SESSION['cart'])){
@@ -50,20 +52,21 @@
           }else{
               echo "<span id=\"cart_count\" class=\"text-warning badge badge-secondary\">0</span>";
           }
-
           ?>
         </a>
       </li>
+        <?php } ?>
     </ul>
     
   </div>
 </nav>
+
 <!-- Push navbar up -->
 <hr class="nav-pusher">
 <hr class="nav-pusher">
 
 <!-- Flash Message -->
-<section class="mt-5">
+<section class="mt-1">
 <?php 
    if(isset($_SESSION['message'])){ ?>
     <div class="alert">

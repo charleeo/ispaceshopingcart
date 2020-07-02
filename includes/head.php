@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- <base href="/mailcronjobs/"> -->
+  <link rel="shortcut icon" type="image/ico" href="assets/images/icon/moodle-favicon.ico">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
    <!-- Font Awesome -->
@@ -12,6 +13,9 @@
   <title>Ispace Virtual Learning</title>
   <script src="https://js.paystack.co/v1/inline.js"></script>
   <style>
+    .navbar-index{
+      
+    }
   .cart{
     font-size: 1.2rem;
   }
@@ -35,7 +39,11 @@
     top: 2rem;
   }
   .my-nav {
-    z-index: 100 !important;
+    position: fixed;
+    top:1px;
+    z-index: 100;
+    width: 100vw;
+    margin-bottom: 45px;
   }
   hr.nav-pusher{
     border: 1px solid #fff;

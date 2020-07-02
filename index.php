@@ -8,7 +8,6 @@ $result = $data->getCoursesForIndex();
 
 include('includes/head.php');
 include('includes/navbar.php');
-// checkInput($data->insertCourse());
 ?>
 <section class="mt-5">
   <div class="row justify-content-center">
@@ -31,7 +30,8 @@ include('includes/navbar.php');
             <i class="fas fa-shopping-cart fa-lg text-light"></i>
           </button>
             <input type="hidden" name="amount" value="<?= $re['amount']?>">
-            <input type="hidden" name="course_id" value="<?= $re['course_id']?>">
+            <input type="hidden" name="course_id" value="<?= $re['id']?>">
+            <!-- <input type="hidden" name="course_id" value="<?= $re['course_id']?>"> -->
             <input type="hidden" name="fullname" value="<?= $re['fullname']?>">
             <input type="hidden" name="summary" value="<?= $re['summary']?>">
             <input type="hidden" name="course_immage" value="<?= $re['course_image']?>">
