@@ -1,5 +1,4 @@
 <?php
-
 require_once('./config/Database.php');
 require_once('query/GetData.php');
 require_once('./config/confi.php');
@@ -28,14 +27,28 @@ if(!is_logged_in()){
       </p>
     </div>
   <?php }  ?>
-  <div class="row justify-content-center">
-    <?php foreach($result as $re){ ?>
-    <div class="col-md-4 py-4 col-sm-6">
+  <div class="row justify-content-center px-4 pt-4">
+    <?php
+    // $courseId = array_column($result,'course_id');
+    foreach($result as $re){ 
+      $result2 = $models->getAllCouserFieldsById($re['course_id']);
+      ?>
+    <div class="col-md-4 py-4 col-sm-4">
       <div class="card">
-        <div class="card-header">
-          <h3 class="text-center"><?= $re['fullname']?></h3>
-        </div>
-        <div class="card-body">
+        <div class="card-header border-0 image-card-header">
+        <?php if(!empty($result2['course_image'] )){
+            ?>
+            <img src="<?php echo $result2['course_image']; ?>" alt="<?php echo $re['fullname']?>" style="height:100px;" />
+         <?php } ?>
+          
+          </div>
+          <div class="card-body">
+              <h6 class="text-center">Course Name: <?= $re['fullname']?></h6>
+          <!-- From the updated record -->
+        <?php if(!empty($result2['amount'] )){
+            ?>
+            <p class="text-center"> Amount: &#8358;<?= $result2['amount']?></p>
+         <?php } ?>
           <p><?= $re['summary']?></p>
         </div> <hr>
         <div class="">

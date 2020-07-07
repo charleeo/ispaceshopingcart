@@ -48,9 +48,19 @@
   hr.nav-pusher{
     border: 1px solid #fff;
   }
+  .image-card-header{
+    background: #fff;
+  }
+  .show-more{
+    display: none;
+  }
+  .toggle-btn{
+    display: none;
+  }
+
   </style>
 </head>
 <body class='body'>
   <div class="clear"></div>
-  <div class="container-fluid mt-5">
+  <div class="mt-5">
  

@@ -14,7 +14,8 @@ if(isset($_POST['update_course'])){
   $fullname = checkInput($_POST['fullname']);
   $shortname = checkInput($_POST['shortname']);
   $result = $data->getCourseById($courseId);
-
+  $imageString = $data->getCourseByImagePath($courseId);
+  $imagePath = $imageString['course_image'];
 
   if(isset($_FILES['course_image'])){
     $errors= array();
@@ -42,17 +43,21 @@ if(isset($_POST['update_course'])){
         $errors ='Amount is required';
 
     }
-    
     if(empty($errors)==true) {
+      // echo $imagePath; exit;
+      if(file_exists('../'.$imagePath)){
+        unlink('../'.$imagePath);
+      }
       move_uploaded_file($file_tmp,"../assets/images/".$fileNameToUpload);
       $dbPath = "assets/images/$fileNameToUpload";
       if($result != null OR $result != '' OR !empty($result) && $result == $courseId){
-        // echo "Result is not empty"; exit;
+        
         $models->updateCourse($amount, $dbPath, $courseId);
       }else{ 
-        // echo "Result is  empty"; exit;
         
-          $models->insert2($courseId,$shortname,$fullname,$summary,$amount,$dbPath);
+        
+          // $models->insert2($courseId,$shortname,$fullname,$summary,$amount,$dbPath);
+          $models->insert($courseId,$shortname,$fullname,$summary,$amount,$dbPath);
         }
         
       $_SESSION['message'] = "Course Updated Successfully";

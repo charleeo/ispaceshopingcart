@@ -4,14 +4,17 @@ require_once('query/GetData.php');
 require_once('config/confi.php');
 $errors = '';
 $courses = $_SESSION['cart'];
+$courses = array_column($courses, 'fullname');
+$courses =  implode(',',($courses));
 // if(isset($_POST['checkout'])){
   $amount = checkInput($_POST['payment_plan']);
   $email = checkInput($_POST['email']);
   $phone = checkInput($_POST['phone']);
   $firstName = checkInput($_POST['firstname']);
   $lastname = checkInput($_POST['lastname']);
-  if(empty($firstName) OR empty($email) OR empty($phone) OR empty($lastname) OR empty($amount)){
-$errors = " All the fields are required ";
+  // $currency = checkInput($_POST['currency']);
+  if(empty($firstName) OR empty($email) OR empty($phone)  OR empty($amount)){
+      $errors = " Please fill out the required fields ";
   }
   else if(!is_numeric($phone)){
     $errors = " Phone must be number ";
@@ -42,21 +45,24 @@ $errors = " All the fields are required ";
       <h4 class="text-center">Payment Details</h4>
     </div>
     <div class="card-body">
-      <h5 class="card-title text-center">Hello <?php echo $email ?>!</h5> <hr>
+      <h5 class="card-title text-center">Hello  <?php echo $firstName ?>!</h5> <hr>
       <p>
         Your have ordered the below transaction details please review before proceeding to make payment
       </p>
       <ul class="list-group">
         <li class="list-group-item">Transaction Amount: &#8358; <b> <?php echo number_format($amount,2);?></b> </li>
-        <li class="list-group-item">Courses: <b> <?php
+        <?php
         foreach ($cart_id as $key => $value) {
-          echo $value['fullname'];
-        }
-               
-        ?></b></li>
+          ?>
+        <li class="list-group-item">
+          <?php echo $value['fullname']; ?>    
+        </li>
+        <?php  } ?>
         <li class="list-group-item">Email: <b> <?php echo $email?></b></li>
 
-        <li class="list-group-item">Names: <b><?php echo $firstName?> &nbsp; <?php echo $lastname?></b></li>
+        <li class="list-group-item">Names: <b><?php echo $firstName;
+      
+        ?> &nbsp; <?php echo $lastname?></b></li>
       </ul>
       <p class="text-info pt-2">Best Regards <b>Ispace Virtual Learning</b> </p>
     </div>

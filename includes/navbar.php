@@ -3,7 +3,7 @@
   
   <ul class="navbar-nav mr-auto">
     <li class="nav-item active">
-      <a class="nav-link " href="https://ispace.prolearncloud.com"> <img src="./assets/images/logo/ispacelogo.png" alt=" Ispacelogo" width="300px" height="80px"> <span class="sr-only">(current)</span></a>
+      <a class="nav-link " href="https://ispace.prolearncloud.com"> <img src="./assets/images/logo/ispacelogo.png" alt=" Ispacelogo" width="200px" height="70px"> <span class="sr-only">(current)</span></a>
     </li>
   </ul>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,8 +12,17 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link " href="index.php">Prices <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link " href="https://ispace.prolearncloud.com/local/staticpage/view.php?page=about">About </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="https://ispace.prolearncloud.com/local/staticpage/view.php?page=codingkits">Coding Kits </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="https://ispace.prolearncloud.com/local/staticpage/view.php?page=faqs">Faqs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="./index.php">Courses and Payment</a>
       </li>
     </ul>
 
@@ -21,20 +30,21 @@
     <ul class="navbar-nav mr-0">
       <?php if(is_logged_in()) { ?>
 
-      <li class="nav-item">
-        <a class="nav-link" href="./logout.php">Logout</a>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dashboard
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="./view_payment.php">View Payments</a>
+          <a class="dropdown-item" href="./edit_course.php">Edit Course</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="./logout.php">Logout</a>
+        </div>
       </li>
       <?php
        } 
-      else{
       ?>
-      <li class="nav-item">
-        <a class="nav-link" href="./login.php">Log-in</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="./register.php">Register</a>
-      </li>
-      <?php } ?>
     </ul>
     <!--  -->
 

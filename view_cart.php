@@ -6,7 +6,6 @@
   include('includes/navbar.php');
   $totalAmount = 0;
   if(!empty($_SESSION['cart'])){
-    
 ?>
 <?php 
    if(isset($_GET['error'])){ ?>
@@ -22,7 +21,7 @@
     </div>
   <?php }  ?>
 <section>
-  <div class="row  pl-0">
+  <div class="row  px-4">
     <div class="col-md-8 col-sm-9">
     <div class="card border-0 mt-5">
       <div class="card-header"><h6>My Cart details</h6></div>
@@ -57,17 +56,6 @@
             <h4 class="text-start">Price Details</h4>
           </div>
           <div class="card-body border-0">
-            <!-- <div class="row">
-              
-              <div class="col-md-7 col-sm-7">
-                <h5 class="text-info">Price for <?php echo count($cart_id) ?> Course(s)</h5> <hr>
-                <h5 class="text-dark">Part Payment</h5> <hr>
-                <h5 class="text-dark">Full Payment</h5> 
-              </div>
-                <div class="col-md-5 col-sm-5">
-                  <p class="text-center">&#8358;<?php echo (int)$totalAmount / 2;?></p> <hr>
-                  <p class="text-center">&#8358;<?php echo (int)$totalAmount;?></p>
-              </div> -->
               <?php 
               foreach($cart_id as $cart){
   
@@ -82,23 +70,24 @@
                 <tbody>
                   <tr>
                     <td>
-                       <?php echo count($cart_id) ?>
-                  </td>
+                      <?php echo count($cart_id) ?>
+                    </td>
                     <td>&#8358;<?php echo (int)$totalAmount * 2 ;?></td>
                     <td> &#8358;<?php echo (int)$totalAmount;?></td>
-                </tr>
+                  </tr>
                 </tbody>
               </table>
               <a href="#payhere" class="btn btn-info btn-sm">Pay Below</a>
+            </div>
           </div>
         </div>
-      </div>
+        <span id="payhere"></span>
     </div>
   </div>
-</section>
-<span id="payhere"></span>
+</section> 
+
 <section >
-<div class="card-footer " style="background:#fff">
+<div class="card-footer " style="background:#fff"> 
 <h4 class="text-center">Payment Form</h4>
 <div class="row">
   <div class="col-md-6 col-sm-6 offset-3">
@@ -111,7 +100,7 @@
         </div>
         <div class="col-md-8 col-sm-8">
           <div class="form-group">
-            <select name="payment_plan" id="payment_plan" class="form-control border-0">
+            <select name="payment_plan" id="payment_plan" required class="form-control border-0">
               <option value="">Select a payment option</option>
               <option value="<?php echo (int)$totalAmount?>">Full Payment</option>
               <option value="<?php echo (int)$totalAmount /2 ?>">Part Payment</option>
@@ -119,6 +108,23 @@
           </div>
         </div>
       </div>
+      <!-- <div class="row">
+        <div class="col-md-4 col-sm-4">
+          <div class="form-group">
+            <label for="currency">Payment Currency</label>
+          </div>
+        </div>
+        <div class="col-md-8 col-sm-8">
+          <div class="form-group">
+            <select name="currency" id="" required class="form-control">
+              <option value="">Select Currency</option>
+              <option value="NGN">NGN</option>
+              <option value="USD">USD</option>
+              <option value="GHS">GHS</option>
+            </select>
+          </div>
+        </div>
+      </div>  -->
       <div class="row">
         <div class="col-md-4 col-sm-4">
           <div class="form-group">
@@ -139,7 +145,7 @@
         </div>
         <div class="col-md-8 col-sm-8">
           <div class="form-group">
-            <input type="number" name="phone" placeholder="Phone number here" class="form-control" />
+            <input type="number" name="phone" required placeholder="Phone number here" class="form-control" />
           </div>
         </div>
       </div> 
@@ -151,7 +157,7 @@
         </div> 
         <div class="col-md-8 col-sm-8">
           <div class="form-group">
-            <input type="text" name="firstname" placeholder="for above one child, separate with ," class="form-control" />
+            <input type="text" name="firstname" required placeholder="for above one child, separate with ," class="form-control" />
             <small class="text-danger">If you're paying for more than one child, please separate their names, with coma(,)</small>
           </div>
         </div>

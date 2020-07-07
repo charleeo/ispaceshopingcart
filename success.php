@@ -46,9 +46,9 @@ if(!isset($_GET['success'])){
         <ul class="list-group">
           <li class="list-group-item">Transaction ID: <b><?php echo $reference; ?> </b></li>
           <li class="list-group-item">Transaction Amount: &#8358; <b> <?php echo number_format($amount,2);?></b> </li>
-          <?php foreach ($_SESSION['course'] as $key => $value) {
+          <?php foreach (explode(',',$_SESSION['course']) as $key => $value) {
           ?>
-          <li class="list-group-item">Course: <b> <?php echo $value['fullname'];?> </b></li> 
+          <li class="list-group-item">Course: <b> <?php echo $value;?> </b></li> 
           <?php }         ?>
                 
           <li class="list-group-item">Email: <b> <?php echo $email?></b></li>

@@ -63,6 +63,48 @@ class Models extends Database{
       return $result;
     } 
   }
+  public  function getAllCouserFieldsById($courseId){
+    $sql = sprintf('SELECT amount, course_image FROM test_courses_information WHERE course_id in("%s")', $courseId);
+    $result = $this->conn->query($sql);
+    if(mysqli_num_rows($result) > 0){
+      $result = $result->fetch_assoc();
+    }else{
+      $result = '';
+    }
+    return $result;
+  }
+  public  function getCourseByImagePath($courseId){
+    
+    $sql = "SELECT course_image   FROM `test_courses_information` WHERE course_id = ?";
+    $stmt = $this->conn->prepare($sql);
+    if(!$stmt)
+    {
+      echo " Error ". $this->conn->error;
+      exit();
+    }
+    if(!$stmt->bind_param('i',$courseId))
+    {
+      echo " Error ". $this->conn->error;
+      exit();
+    }
+    
+    if(!$stmt->execute())
+    {
+      echo " Error ". $this->conn->error;
+      exit();
+    }
+     $result = $stmt->get_result();   
+     
+     if($result->num_rows > 0)
+     {
+       $result = $result->fetch_assoc();
+       return  $result;
+     }
+     else  {
+      $result = '';
+      return $result;
+    } 
+  }
   public  function getTransactionByReferenceID($trans_id){
     
     $sql = "SELECT transaction_id   FROM `transactions` WHERE transaction_id = ?";
@@ -132,29 +174,53 @@ class Models extends Database{
     } 
   }
 
-  public function insert($table, array $fields, array $values){
-    $field = implode(',',$fields);
-    $value = implode(',',$values);
-    // $result_string = "'" . str_replace(",", "','", $mystring) . "'";
-    $value = "'" . str_replace(",", "','", $value) . "'";
-    $sql = "INSERT INTO $table ($field) VALUES($value)";
-      $stmt = $this->conn->prepare($sql);
+  // public function insert($table, array $fields, array $values, $placeholder, $bindingStrin){
+  //   $field = implode(',',$fields);
+  //   $value = implode(',',$values);
+  //   $placeholder = implode(',',$placeholder);
+    
+  //   // $result_string = "'" . str_replace(",", "','", $mystring) . "'";
+  //   $bindingStrin = "'" . str_replace(",", "','", $bindingStrin) . "'";
+  //   $value = "'" . str_replace(",", "','", $value) . "'";
+  //   $sql = "INSERT INTO $table ($field) VALUES($placeholder)";
+  //     $stmt = $this->conn->prepare($sql);
+  //     echo $bindingStrin;
+  //     print_r($sql);
       
-      if($stmt === false)
-      {
-        echo " Error ". $this->conn->error;
-        exit();
-      }
-      if(!$stmt->execute())
-      {
-        echo " Error ". $this->conn->error;
-        exit();
-      }
+  //     if($stmt === false)
+  //     {
+  //       echo " Error ". $this->conn->error;
+  //       exit();
+  //     }
+
+  //     if(!$stmt->bind_param($bindingStrin,$value)){
+
+  //       echo " Error, could not bind parameter ". $this->conn->error;
+  //       exit();
+  //     }
+  //     if(!$stmt->execute())
+  //     {
+  //       echo " Error ". $this->conn->error;
+  //       exit();
+  //     }
       
-      else
-      {
-        return;
-      }
+  //     else
+  //     {
+  //       return;
+  //     }
+  //   }
+  
+  public function insert($courseId, $shortname,$fullname, $summary, $amout, $couse_image){
+    $sql = sprintf('INSERT INTO test_courses_information (course_id,shortname,fullname,summary,amount,course_image) VALUES("%s","%s","%s","%s","%s","%s")'
+    ,$courseId, $shortname,$fullname, $summary, $amout, $couse_image);
+  
+    if($this->conn->query($sql)===true){
+      return true;
+    }else{
+
+      echo " Error here ". $this->conn->error; exit;
+
+    }
     }
   
   public function insert2($courseId, $shortname,$fullname, $summary, $amout, $couse_image)
@@ -211,33 +277,7 @@ class Models extends Database{
         return;
       }    
     }
-  public function insertTest($courseId, $shortname,$fullname, $summary, $amout, $couse_image)
-  {
     
-    $sql = "INSERT INTO test_courses_information (course_id, shortname, fullname, amount, summary, course_image) VALUES (?,?,?,?,?,?)";
-      $stmt = $this->conn->prepare($sql);
-      
-      if($stmt === false)
-      {
-        echo " Error ". $this->conn->error;
-        exit();
-      }
-      if(!$stmt->bind_param('ssssss',$courseId, $shortname, $fullname, $amout,$summary,$couse_image))
-      {
-        echo " Error ". $this->conn->error;
-        exit();
-      }
-      if(!$stmt->execute())
-      {
-        echo " Error ". $this->conn->error;
-        exit();
-      }
-      
-      else
-      {
-        return;
-      }
-    }
 
   
     public function insertTransaction($trans_id, $fname,$lname, $amout, $email, $curr,$courses)
@@ -309,7 +349,18 @@ class Models extends Database{
         $stmt->execute();
         $result = $stmt->get_result();    
         return $result;
-      }  
+      } 
+      
+      public  function getPaymentHistory(){
+        $sql = 'SELECT * FROM transactions';
+        $result = $this->conn->query($sql);
+        if(mysqli_num_rows($result) > 0){
+          $result = $result->fetch_all(MYSQLI_ASSOC);
+        }else{
+          $result = '';
+        }
+        return $result;
+      }
   }
   
 
