@@ -33,7 +33,7 @@ include('includes/navbar.php');
         <td>
           <?php
           foreach(explode(',',$history['courses']) as $course){
-            echo trim($course, '""');
+            echo trim($course, '""')."<br/>";
           }?>
         </td>
         <td><?php echo $history['transaction_id'];?></td>

@@ -38,7 +38,7 @@ $courses =  implode(',',($courses));
   include('includes/navbar.php');
 ?>
 <section>
-  <div class="row mt-5">
+  <div class="row py-4 justify-content-center" >
   <div class="col-md-8 offset-md-2 col-sm-8">
   <div class="card border-0">
     <div class="card-header">
@@ -85,6 +85,7 @@ $courses =  implode(',',($courses));
       key: API_KEY,
       email: '<?php echo $email?>',
       amount: <?php echo $amount * 100?>,
+      currency:"NGN",
       ref: ''+Math.floor((Math.random() * 1000000000) + 1), 
       metadata: {
          custom_fields: [

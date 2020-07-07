@@ -119,7 +119,7 @@
             <select name="currency" id="" required class="form-control">
               <option value="">Select Currency</option>
               <option value="NGN">NGN</option>
-              <option value="USD">USD</option>
+              <option value="usd">USD</option>
               <option value="GHS">GHS</option>
             </select>
           </div>

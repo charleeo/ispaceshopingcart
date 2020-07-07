@@ -33,7 +33,7 @@ class Models extends Database{
   }
   public  function getCourseById($courseId){
     
-    $sql = "SELECT course_id   FROM `test_courses_information` WHERE course_id = ?";
+    $sql = "SELECT course_id   FROM `courses_information` WHERE course_id = ?";
     $stmt = $this->conn->prepare($sql);
     if(!$stmt)
     {
@@ -64,7 +64,7 @@ class Models extends Database{
     } 
   }
   public  function getAllCouserFieldsById($courseId){
-    $sql = sprintf('SELECT amount, course_image FROM test_courses_information WHERE course_id in("%s")', $courseId);
+    $sql = sprintf('SELECT amount, course_image FROM courses_information WHERE course_id in("%s")', $courseId);
     $result = $this->conn->query($sql);
     if(mysqli_num_rows($result) > 0){
       $result = $result->fetch_assoc();
@@ -75,7 +75,7 @@ class Models extends Database{
   }
   public  function getCourseByImagePath($courseId){
     
-    $sql = "SELECT course_image   FROM `test_courses_information` WHERE course_id = ?";
+    $sql = "SELECT course_image   FROM `courses_information` WHERE course_id = ?";
     $stmt = $this->conn->prepare($sql);
     if(!$stmt)
     {
@@ -140,7 +140,7 @@ class Models extends Database{
   public  function getCoursesSingle($courseId){
 
 
-    $sql = "SELECT *  FROM `courses_information` WHERE 'course_id' = ? ";
+    $sql = "SELECT *  FROM `courses_information` WHERE 'id' = ? ";
     $stmt = $this->conn->prepare($sql);
     if(!$stmt)
     {
@@ -211,7 +211,7 @@ class Models extends Database{
   //   }
   
   public function insert($courseId, $shortname,$fullname, $summary, $amout, $couse_image){
-    $sql = sprintf('INSERT INTO test_courses_information (course_id,shortname,fullname,summary,amount,course_image) VALUES("%s","%s","%s","%s","%s","%s")'
+    $sql = sprintf('INSERT INTO courses_information (course_id,shortname,fullname,summary,amount,course_image) VALUES("%s","%s","%s","%s","%s","%s")'
     ,$courseId, $shortname,$fullname, $summary, $amout, $couse_image);
   
     if($this->conn->query($sql)===true){
@@ -226,7 +226,7 @@ class Models extends Database{
   public function insert2($courseId, $shortname,$fullname, $summary, $amout, $couse_image)
   {
     
-    $sql = "INSERT INTO test_courses_information (course_id, shortname, fullname, amount, summary, course_image) VALUES (?,?,?,?,?,?)";
+    $sql = "INSERT INTO courses_information (course_id, shortname, fullname, amount, summary, course_image) VALUES (?,?,?,?,?,?)";
       $stmt = $this->conn->prepare($sql);
       
       if($stmt === false)
@@ -252,7 +252,7 @@ class Models extends Database{
     }
 
     public function updateCourse($amount, $image, $course_id){
-      $sql = "UPDATE `test_courses_information` SET amount = ?, course_image = ? WHERE course_id = ?";  
+      $sql = "UPDATE `courses_information` SET amount = ?, course_image = ? WHERE course_id = ?";  
       $stmt = $this->conn->prepare($sql);
       
       if($stmt === false)

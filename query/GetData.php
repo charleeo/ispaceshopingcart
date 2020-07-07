@@ -8,13 +8,13 @@ class GetData extends Models{
   public function getCourses()
   {
     $models = new Models();
-    $courses= $models->getAll('courses_information', 'id', 'ASC', ['amount', 'fullname', 'summary', 'shortname','course_id', 'course_image']);
+    $courses= $models->getAll('pro_course', 'id', 'ASC', ['amount', 'fullname', 'summary', 'shortname','course_id']);
     return $courses;
   }
   public function getCoursesForIndex()
   {
     $models = new Models();
-    $courses= $models->getAll('test_courses_information', 'id', 'ASC', ['amount', 'fullname', 'summary', 'shortname','course_id', 'course_image']);
+    $courses= $models->getAll('courses_information', 'id', 'ASC', ['amount', 'fullname', 'summary', 'shortname','course_id', 'course_image']);
     // $courses= $models->getAll('pro_course', 'id', 'ASC', ['amount', 'fullname', 'summary', 'shortname','course_id', 'course_image']);
     return $courses;
   }
