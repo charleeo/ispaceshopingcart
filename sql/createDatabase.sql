@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `moodle`;
-USE `moodle`;
+-- CREATE DATABASE IF NOT EXISTS `ispacedb`;
+-- USE `moodle`;
 CREATE TABLE IF NOT EXISTS `courses_information`
 (
   `id` int(11) unsigned not null auto_increment primary key,
@@ -31,7 +31,9 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `txn_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- ALTER TABLE `courses_information` ADD `createdat` TIMESTAMP NOT NULL AFTER `messagebody`;
+ALTER TABLE `transactions`  ADD `plan` VARCHAR(20) NOT NULL  AFTER `courses`,  ADD `due_date` varchar(20) NOT NULL  AFTER `plan`;
+ALTER TABLE `transactions`  ADD `children` INT NOT NULL  AFTER `due_date`;
+
 -- ALTER TABLE `courses_information` CHANGE `couse_image` `course_image` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
 
 

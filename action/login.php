@@ -34,7 +34,7 @@ if(isset($_POST['login']))
     $_SESSION['admin_name'] = $admin_name;
     $_SESSION['error'] = $error;
     
-    header("Location: login.php");
+    header("Location: ../login.php");
   }
   else
   {

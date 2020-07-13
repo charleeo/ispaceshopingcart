@@ -7,13 +7,27 @@ $courses = $_SESSION['cart'];
 $courses = array_column($courses, 'fullname');
 $courses =  implode(',',($courses));
 // if(isset($_POST['checkout'])){
-  $amount = checkInput($_POST['payment_plan']);
+  $amount = checkInput($_POST['amount']);
   $email = checkInput($_POST['email']);
   $phone = checkInput($_POST['phone']);
   $firstName = checkInput($_POST['firstname']);
   $lastname = checkInput($_POST['lastname']);
+  $paymentPlan = checkInput($_POST['payment_plan']);
+  $dueDate  = date("Y-m-d", time());
+  $date = new DateTime($dueDate); // Y-m-d
+  
+  
+  if($paymentPlan == 'full'){
+    $amount = $amount * 2;
+    $paymentPlan = 'Full Payment';
+    $date->add(new DateInterval('P60D'));
+  }else{
+    $paymentPlan = "Part Payment";
+    $date->add(new DateInterval('P30D'));
+  }
+  $dueDate =$date->format('d \of M  \, Y');
   // $currency = checkInput($_POST['currency']);
-  if(empty($firstName) OR empty($email) OR empty($phone)  OR empty($amount)){
+  if(empty($firstName) OR empty($email) OR empty($phone) ){
       $errors = " Please fill out the required fields ";
   }
   else if(!is_numeric($phone)){
@@ -33,6 +47,8 @@ $courses =  implode(',',($courses));
     $_SESSION['email'] = $email;
     $_SESSION['amount'] = $amount;
     $_SESSION['course'] = $courses;
+    $_SESSION['plan']   = $paymentPlan;
+    $_SESSION['dueDate']   = $dueDate;
   }
   include('includes/head.php');
   include('includes/navbar.php');
@@ -59,6 +75,8 @@ $courses =  implode(',',($courses));
         </li>
         <?php  } ?>
         <li class="list-group-item">Email: <b> <?php echo $email?></b></li>
+        <li class="list-group-item">Payment Plan: <b> <?php echo $paymentPlan?></b></li>
+        <li class="list-group-item">Due Date: <b> <?php echo $dueDate;?></b></li>
 
         <li class="list-group-item">Names: <b><?php echo $firstName;
       
@@ -80,9 +98,9 @@ $courses =  implode(',',($courses));
 <!-- place below the html form -->
 <script>
   function payWithPaystack(){
-    const API_KEY = "pk_test_b04e1a0182d8e61539c2e12863650aa4859e8443";
+    
     var handler = PaystackPop.setup({
-      key: API_KEY,
+      key: '<?php echo APIKEY ?>',
       email: '<?php echo $email?>',
       amount: <?php echo $amount * 100?>,
       currency:"NGN",

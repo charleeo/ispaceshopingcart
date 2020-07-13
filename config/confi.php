@@ -44,5 +44,4 @@ function getError($error)
   }
   else return '';
 }
-
-date_default_timezone_set('Africa/Lagos');
+define("APIKEY", "pk_test_b04e1a0182d8e61539c2e12863650aa4859e8443");date_default_timezone_set('Africa/Lagos');

@@ -63,6 +63,9 @@ if(!is_logged_in()){
               <button type="submit" class="btn btn-info btn-sm pull-right ml-5" name="update_course" id="course_id<?= $re['course_id']?>">
                 Update Course
               </button>
+              <a href = "action/delete.php?course_id=<?php echo $re['course_id']?>" class="btn btn-danger btn- ml-5" name="update_course" id="course_id<?= $re['course_id']?>">
+                Delete
+              </a>
             </div>
             <input type="hidden" name="course_id" value="<?= $re['course_id']?>">
             <input type="hidden" name="summary" value="<?= $re['summary']?>">

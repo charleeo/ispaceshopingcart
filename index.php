@@ -15,18 +15,20 @@ include('includes/navbar.php');
     <div class="col-md-4 col-sm-6">
       <div class="card shadow-lg">
         <div class="card-header border-0 image-card-header">
-          <img class="rounded index-image" src="<?= $re['course_image']?>" style="width:100%; height:180px"/>
+          <img class="rounded index-image" src="<?= $re['course_image']?>" style="width:100%; height:190px"/>
         </div>
         <div class="card-body border-0">
           <div class="card-title">
             <h6>Course Title: <?= $re['fullname']?></h6>
           </div>
           <?php $summary = substr($re['summary'], 0, 65); ?>
-          <p><b>Course Summary: </b>  <?= $summary;?> <span class="show-more"><?php echo substr($re['summary'], 65, -1); ?></span>
-          <?php if(strlen($re['summary']) > 65): ?>
-          <input type="button" class="btn-link btn text-info view-btn" onclick="ViewAll();" value="More">
+          <p class="<?php echo (strlen($re['summary']) <= 65) ?'p-wdown':''?>"><b>Course Summary: </b>  <?= $summary;?> 
+          <span class="show-more"><?php echo substr($re['summary'], 65, -1); ?>
+        </span>
+        <?php if(strlen($re['summary']) > 65): ?>
+        <input type ="button" value="More Details" class="view-btn btn btn-link text text-success" />
         </p>
-          <?php endif;?>
+          <?php endif ;?>
         </div>
         <div class="card-footer bg-secondary  text-center">
           <form action="action/add_to_cart.php" method="post">
@@ -41,6 +43,12 @@ include('includes/navbar.php');
             <input type="hidden" name="summary" value="<?= $re['summary']?>">
             <input type="hidden" name="course_immage" value="<?= $re['course_image']?>">
           </form>
+          <br>
+          <?php if(is_logged_in()) { ?>
+              <a href = "action/delete.php?course_id=<?php echo $re['course_id']?>" class="btn btn-danger btn- ml-5" name="update_course" id="course_id<?= $re['course_id']?>">
+                Delete
+              </a>
+            <?php } ?>
         </div>
       </div>
     </div>
@@ -48,4 +56,5 @@ include('includes/navbar.php');
   </div>
 </section>
 <?php
-include('./includes/footer.php');
+include('./includes/footer.php');?>
+

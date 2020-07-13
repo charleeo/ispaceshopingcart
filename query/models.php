@@ -137,6 +137,17 @@ class Models extends Database{
       return $result;
     } 
   }
+
+  public function getTransactionDetailsById($id){
+    $sql = sprintf("SELECT * FROM transactions WHERE transaction_id = '%s' ", $id);
+    $result =   $this->conn->query($sql);
+    if($result->num_rows > 0){
+      $result = $result->fetch_assoc();
+      return $result;
+    }else{
+      return $result = '';    }
+
+  }
   public  function getCoursesSingle($courseId){
 
 
@@ -280,11 +291,11 @@ class Models extends Database{
     
 
   
-    public function insertTransaction($trans_id, $fname,$lname, $amout, $email, $curr,$courses)
+    public function insertTransaction($trans_id, $fname,$lname, $amout, $email, $curr,$courses, $dueDate, $paymentPlan, $children)
     {
      
     
-      $sql = "INSERT INTO transactions (transaction_id, fname, lname, grand_total, currency, email,courses) VALUES (?,?,?,?,?,?,?)";
+      $sql = "INSERT INTO transactions (transaction_id, fname, lname, grand_total, currency, email,courses, due_date,plan,children) VALUES (?,?,?,?,?,?,?,?,?,?)";
         $stmt = $this->conn->prepare($sql);
         
         if($stmt === false)
@@ -292,7 +303,7 @@ class Models extends Database{
           echo " Error ". $this->conn->error;
           exit();
         }
-        if(!$stmt->bind_param('sssdsss',$trans_id, $fname, $lname, $amout,$curr,$email,$courses
+        if(!$stmt->bind_param('sssdssssss',$trans_id, $fname, $lname, $amout,$curr,$email,$courses,$dueDate,$paymentPlan,$children
         ))
         {
           echo " Error ". $this->conn->error;
@@ -360,6 +371,16 @@ class Models extends Database{
           $result = '';
         }
         return $result;
+      }
+
+      public function deleteCourse($courseId){
+        $sql = sprintf("DELETE FROM test_courses_information WHERE course_id = '%s' ", $courseId);
+        if($this->conn->query($sql)){
+          return true;
+        }else{
+          echo " Error". $this->conn->error;
+        }
+        
       }
   }
   

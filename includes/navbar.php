@@ -22,6 +22,15 @@
         <a class="nav-link " href="https://ispace.prolearncloud.com/local/staticpage/view.php?page=faqs">Faqs</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link " href="https://ispace.prolearncloud.com/local/staticpage/view.php?page=nigeria">Nig Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="https://ispace.prolearncloud.com/local/staticpage/view.php?page=ghana">Ghana</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="https://ispace.prolearncloud.com/local/staticpage/view.php?page=abidjan">CIV</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link " href="./index.php">Courses and Payment</a>
       </li>
     </ul>
@@ -76,7 +85,7 @@
 <hr class="nav-pusher">
 
 <!-- Flash Message -->
-<section class="mt-1">
+<section class="mt-5">
 <?php 
    if(isset($_SESSION['message'])){ ?>
     <div class="alert">
